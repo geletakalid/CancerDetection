@@ -18,7 +18,7 @@ router.post("/signup",(req,res)=>{
      }
 
   
-    //res.json({sucess:"678440"})
+    res.json({sucess:"678440"})
 
 User.findOne({email:email}).then((feed)=>{
     
@@ -31,7 +31,7 @@ user =new User (
 
     }
 )
-
+//okay 
 
 user.save().then((savedresult)=>{
 
