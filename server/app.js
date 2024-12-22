@@ -18,7 +18,7 @@ mongoose.connection.on('connected',()=>{
 console.log("cool2")
 
 })
-require('./models/user.js')
+app.use(require('./models/user.js'))
 //4MoTnC6yxynfRQlE
 
 app.use(require('./routes/authen.js'))
