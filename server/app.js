@@ -18,11 +18,12 @@ mongoose.connection.on('connected',()=>{
 console.log("cool2")
 
 })
-app.use(require('./models/user.js'))
+require('./models/user.js')
+require('./models/posts.js')
 //4MoTnC6yxynfRQlE
 
 app.use(require('./routes/authen.js'))
 app.get('/',promiddleware,(req ,res)=>{res.send("hi")})
- app.listen(port,()=>{
+app.listen(port,()=>{
     console.log("cool")
  })
