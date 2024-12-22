@@ -3,13 +3,19 @@ const router=express.Router();
 const mongo=require('mongoose')
 const User=mongo.model("User")
 const bcrypt=require("bcryptjs")
-router.get("/",(req,res)=>{
+const {jwtkey}=require("../keyvalue")
+const jwt= require("jsonwebtoken");
+const auth = require("../middleware/auth");
+router.get("/", (req,res)=>{
 res.send("hi computer") 
+})
 
-
+router.get("/protected",auth,(req,res)=>{
+res.json({outcome:"loged in successfully"})
 
 
 })
+
 router.post("/signup",(req,res)=>{
     //console.log(req.body.name)
     const {name,email,password}=req.body
@@ -64,20 +70,30 @@ console.log(err)
 
 })
 })
+
+
+
+
 router.post("/signin",(req,res)=>{
 const {email,password}=req.body
 if(!email){
-res.json({err:"no email entered"})
+return  res.json({err:"no email entered"})
 }
 if(!password){
-    res.json({err:"no password  entered"})
+   return  res.json({err:"no password  entered"})
 }
 
 User.findOne({email:email}).then((details)=>{
-
+    console.log(details)
 bcrypt.compare(password,details.password).then((truth)=>{
-
-truth?res.json({err:"signed in"}):res.json({err:"wrong email or password "})
+    
+    if (truth) {
+        const token = jwt.sign({ id:details._id }, jwtkey);
+        console.log("//");
+        return res.json({ token: token });
+    } else {
+        return res.json({ err: "wrong email or password" });
+    }
 
 }
 
