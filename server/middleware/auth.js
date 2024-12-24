@@ -24,10 +24,10 @@ module.exports=(req ,res , next)=>{
 
     const {id}=payload
 User.findById(id).then((Userdetails)=>{
-    console.log(req)
+  
 req.user=Userdetails
-
-console.log(Userdetails)
+//console.log(Userdetails)
+next()
 
 })
 

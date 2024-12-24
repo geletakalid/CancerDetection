@@ -1,8 +1,14 @@
 const mongoose=require('mongoose')
 const {ObjectId}=mongoose.Schema.Types
+
 const Schema= new mongoose.Schema(
 {
 title:{
+type:String,
+required:true
+},
+
+name:{
 type:String,
 required:true
 },

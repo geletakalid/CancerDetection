@@ -23,6 +23,7 @@ require('./models/posts.js')
 //4MoTnC6yxynfRQlE
 
 app.use(require('./routes/authen.js'))
+app.use(require('./routes/createpost.js'))
 app.get('/',promiddleware,(req ,res)=>{res.send("hi")})
 app.listen(port,()=>{
     console.log("cool")
