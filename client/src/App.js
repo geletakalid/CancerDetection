@@ -2,12 +2,32 @@ import logo from './logo.svg';
 import './App.css';
 import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.min.js';
+import bootstrap from 'bootstrap'
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Navbar from './components/navbar';
+import Home from './components/Home';
+import Login from './components/Login';
+import Profile from './components/Profile';
+import Signup from './components/Signup';
 
 function App() {
   return (
-    <Navbar/>
+    <BrowserRouter>
+      <Navbar/>
+    <Routes>
+  
+    <Route path='/' element={<Home/>} />
+
+    <Route path='/signin' element={<Login/>} />
+
+    <Route path='/profile' element={<Profile />} />
+
+    <Route path='/signup' element={<Signup/>} />
+
+   </Routes>
+   
+   </BrowserRouter>
   );
 }
 
