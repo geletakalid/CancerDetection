@@ -21,7 +21,7 @@ router.post("/signup",(req,res)=>{
     const {name,email,password}=req.body
      if(!name||!email||!password){
 
-        res.json({err:"problem 324567"})
+        return res.json({err:"problem 324567"})
      }
 
   
@@ -30,7 +30,7 @@ router.post("/signup",(req,res)=>{
 User.findOne({email:email}).then((feed)=>{
     
 if(feed){
-res.status(422).json({err:" you have an email already"})
+return res.json({err:" you have an email already"})
 }
 
 
@@ -55,7 +55,7 @@ bcrypt.hash(password,12).then((hashedpw)=>{
 }).catch(
 (err)=>{
 
-console.log(err)
+
 }
 
 

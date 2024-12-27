@@ -1,5 +1,12 @@
 const express=require("express")
 const app=express()
+
+const cors = require('cors');
+
+app.use(cors({
+    origin: 'http://localhost:3000'
+  }));
+
 const port=5000
 const {mongouri}=require("./keyvalue.js")
 const { default: mongoose } = require("mongoose")

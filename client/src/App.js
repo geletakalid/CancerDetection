@@ -10,6 +10,7 @@ import Home from './components/Home';
 import Login from './components/Login';
 import Profile from './components/Profile';
 import Signup from './components/Signup';
+import CreatePost from './components/CreatePost';
 
 function App() {
   return (
@@ -21,9 +22,10 @@ function App() {
 
     <Route path='/signin' element={<Login/>} />
 
-    <Route path='/profile' element={<Profile />} />
+    <Route path='/profile' element={<Profile /> } />
 
     <Route path='/signup' element={<Signup/>} />
+    <Route path='/createpost' element={<CreatePost/>} />
 
    </Routes>
    

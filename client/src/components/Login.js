@@ -2,12 +2,12 @@
 import React from "react";
 import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.min.js';
-
+import { Link } from "react-router-dom";
 const Login = () => {
     return (
         <div class="container">
       <div className="card custom col s12 m6 l4 " id="c">
-        <h2 className="loginfont">Sign In</h2>
+        <h3 className="loginfont">Sign In</h3>
         <div className="card-content">
           <form className="col s12">
 
@@ -34,6 +34,7 @@ const Login = () => {
             </button>
           </form>
         </div>
+        <Link to='/signup'><h6>Don't have an account?</h6></Link>
       </div>
       </div>
     );

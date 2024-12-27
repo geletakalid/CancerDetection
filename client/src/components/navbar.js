@@ -11,6 +11,7 @@ return(
           <li><Link to="/signin">Login</Link></li>
           <li><Link to="/signup ">Sign up</Link></li>
           <li><Link to="/profile">Profile</Link></li>
+          <li><Link to="/createpost">Create Post</Link></li>
         </ul>
       </div>
     </nav> )
