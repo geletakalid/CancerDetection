@@ -56,9 +56,10 @@ const Signup = () => {
           setEmail('');
           setPassword('');
           setConfirmPassword('');
+          history('/signin') 
         }
         setIsSubmitting(false);
-        history('/signin') // Reset the submitting state
+        // Reset the submitting state
       })
       .catch((error) => {
         console.log(error);

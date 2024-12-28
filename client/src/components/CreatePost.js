@@ -3,7 +3,7 @@ import 'materialize-css/dist/css/materialize.min.css';
 
 const CreatePost = () => {
   const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+  const [body, setDescription] = useState('');
   const [file, setFile] = useState(null);
 
   const handleTitleChange = (event) => {
@@ -18,31 +18,48 @@ const CreatePost = () => {
     setFile(event.target.files[0]);
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
 
     const formData = new FormData();
-    formData.append('title', title);
-    formData.append('description', description);
     formData.append('file', file);
+    formData.append('upload_preset', 'doctorpost'); // Your upload preset
+    formData.append('cloud_name', 'dbb3wygqs'); // Your cloud name
 
-    try {
-      const response = await fetch('/upload', { 
+    fetch('https://api.cloudinary.com/v1_1/dbb3wygqs/image/upload', {
+      method: 'POST',
+      body: formData,
+    })
+    .then(response => response.json())
+    .then(data => {
+      const pic = data.secure_url;
+
+      return fetch('/createpost', {
         method: 'POST',
-        body: formData
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          title,
+          body,
+          pic, 
+        }),
       });
-
-      if (response.ok) {
+    })
+    .then(postResponse => {
+      if (!postResponse.err) {
+        console.log(postResponse.err)
         console.log('Post created successfully!');
         setTitle('');
         setDescription('');
         setFile(null);
       } else {
-        console.log('Error creating post.');
+        console.log(postResponse.err);
       }
-    } catch (error) {
+    })
+    .catch(error => {
       console.error('Error creating post:', error);
-    }
+    });
   };
 
   return (
@@ -90,7 +107,7 @@ const CreatePost = () => {
                   <textarea 
                     id="description" 
                     className="materialize-textarea" 
-                    value={description} 
+                    value={body} 
                     onChange={handleDescriptionChange} 
                   ></textarea>
                   <label htmlFor="description">Description</label>
